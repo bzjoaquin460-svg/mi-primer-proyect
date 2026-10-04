@@ -1,12 +1,117 @@
-
+```html
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Mi primer proyecto</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Qué personaje sos?</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #111827, #4f46e5);
+            color: white;
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .caja {
+            max-width: 600px;
+            margin: auto;
+            background: rgba(255,255,255,0.12);
+            padding: 30px;
+            border-radius: 20px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            margin: 12px 0;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            cursor: pointer;
+            background: white;
+            color: #111827;
+        }
+
+        button:hover {
+            transform: scale(1.03);
+        }
+
+        #resultado {
+            margin-top: 25px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Hola, GitHub!</h1>
-    <p>Este es mi primer proyecto.</p>
+
+    <div class="caja">
+        <h1>🎭 ¿Qué personaje sos?</h1>
+
+        <p>Elegí una opción en cada pregunta:</p>
+
+        <h2>1. ¿Qué hacés un sábado a la noche?</h2>
+
+        <button onclick="sumar('aventurero')">🚀 Salgo a hacer algo</button>
+        <button onclick="sumar('tranquilo')">🎮 Me quedo jugando</button>
+        <button onclick="sumar('social')">🗣️ Me junto con amigos</button>
+
+        <h2>2. Si tenés un problema...</h2>
+
+        <button onclick="sumar('aventurero')">💪 Lo enfrento de una</button>
+        <button onclick="sumar('tranquilo')">🧠 Pienso antes de actuar</button>
+        <button onclick="sumar('social')">🤝 Le pregunto a alguien</button>
+
+        <h2>3. Elegí una habilidad</h2>
+
+        <button onclick="sumar('aventurero')">⚡ Supervelocidad</button>
+        <button onclick="sumar('tranquilo')">🧠 Superinteligencia</button>
+        <button onclick="sumar('social')">❤️ Poder convencer a cualquiera</button>
+
+        <div id="resultado"></div>
+    </div>
+
+    <script>
+        let puntos = {
+            aventurero: 0,
+            tranquilo: 0,
+            social: 0
+        };
+
+        let respuestas = 0;
+
+        function sumar(tipo) {
+            puntos[tipo]++;
+            respuestas++;
+
+            if (respuestas === 3) {
+                let ganador = Object.keys(puntos).reduce((a, b) =>
+                    puntos[a] > puntos[b] ? a : b
+                );
+
+                let resultado = "";
+
+                if (ganador === "aventurero") {
+                    resultado = "🔥 Sos EL AVENTURERO. Siempre terminás metido en alguna.";
+                } else if (ganador === "tranquilo") {
+                    resultado = "🧠 Sos EL ESTRATEGA. Pensás todo antes de mandarte.";
+                } else {
+                    resultado = "❤️ Sos EL LÍDER. La gente termina siguiéndote.";
+                }
+
+                document.getElementById("resultado").innerHTML =
+                    resultado + "<br><br>🔄 Recargá la página para jugar otra vez.";
+            }
+        }
+    </script>
+
 </body>
 </html>
+```
